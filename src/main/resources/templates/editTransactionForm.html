@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>ABC 가계부</title>
+</head>
+<body>
+<h1>ABC 가계부</h1>
+<h3>내역 수정</h3>
+<form th:action="@{/transactions/{id}/edit(id=${transaction.id})}" method="post" th:object="${transaction}">
+  <input type="hidden" th:field="*{id}" />
+  <label>날짜: <input type="date" th:field="*{date}" /></label><br/>
+  <label>구분:
+    <select th:field="*{type}">
+      <option value=""></option>
+      <option value="수입">수입</option>
+      <option value="지출">지출</option>
+    </select>
+  </label><br/>
+  <label>분류:
+    <select th:field="*{category}" th:value="*{category}">
+      <option value=""></option>
+      <option value="월급" th:if="${transaction.type == '수입'}">월급</option>
+      <option value="장학금" th:if="${transaction.type == '수입'}">장학금</option>
+      <option value="용돈" th:if="${transaction.type == '수입'}">용돈</option>
+      <option value="상여" th:if="${transaction.type == '수입'}">상여</option>
+      <option value="기타" th:if="${transaction.type == '수입'}">기타</option>
+      <option value="식비" th:if="${transaction.type == '지출'}">식비</option>
+      <option value="교통" th:if="${transaction.type == '지출'}">교통</option>
+      <option value="쇼핑" th:if="${transaction.type == '지출'}">쇼핑</option>
+      <option value="문화생활" th:if="${transaction.type == '지출'}">문화생활</option>
+      <option value="주거/통신" th:if="${transaction.type == '지출'}">주거/통신</option>
+      <option value="건강" th:if="${transaction.type == '지출'}">건강</option>
+      <option value="교육" th:if="${transaction.type == '지출'}">교육</option>
+      <option value="기타" th:if="${transaction.type == '지출'}">기타</option>
+    </select>
+  </label><br/>
+  <label>금액: <input type="text" th:field="*{price}" onkeyup="inputNumberFormat(this)" /></label><br/>
+  <label>내용: <input type="text" th:field="*{memo}" /></label><br/>
+  <input type="submit" value="저장" />
+  <a href="/transactions">이전</a>
+</form>
+</body>
+<script>
+  function inputNumberFormat(input) {
+    input.value = numberWithCommas(uncomma(input.value));
+    return input.value;
+  }
+
+  function numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  }
+
+  function uncomma(str) {
+    str = String(str);
+    return str.replace(/[^\d]+/g, '');
+  }
+</script>
+</html>

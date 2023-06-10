@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>ABC 가계부</title>
+</head>
+<body>
+<h1>ABC 가계부</h1>
+<h3>내역 추가</h3>
+<form th:action="@{/transactions/add}" method="post" th:object="${transaction}">
+    <label>구분:
+        <select th:field="*{type}" onchange="changeCategoryOptions(this)">
+            <option value=""></option>
+            <option value="수입">수입</option>
+            <option value="지출">지출</option>
+        </select>
+    </label><br/>
+    <label>날짜: <input type="date" th:field="*{date}" /></label><br/>
+    <label>분류:
+        <select th:field="*{category}" id="categorySelect"></select>
+        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+        </select>
+    </label><br/>
+    <label>금액: <input type="text" th:field="*{price}" onkeyup="inputNumberFormat(this)"/></label><br/>
+    <label>내용: <input type="text" th:field="*{memo}" /></label><br/>
+    <input type="submit" value="추가" />
+    <a href="/transactions">이전</a>
+</form>
+</body>
+<script>
+    function inputNumberFormat(input) {
+        input.value = numberWithCommas(uncomma(input.value));
+        return input.value;
+    }
+
+    function numberWithCommas(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    function uncomma(str) {
+        str = String(str);
+        return str.replace(/[^\d]+/g, '');
+    }
+    function changeCategoryOptions(select) {
+        var categorySelect = document.getElementById("categorySelect");
+        categorySelect.innerHTML = ""; // 기존의 option 제거
+
+        if (select.value === "수입") {
+            // 수입에 대한 category option 추가
+            categorySelect.appendChild(createOption("", "분류"));
+            categorySelect.appendChild(createOption("월급", "월급"));
+            categorySelect.appendChild(createOption("부수입", "부수입"));
+            categorySelect.appendChild(createOption("장학금", "장학금"));
+            categorySelect.appendChild(createOption("용돈", "용돈"));
+            categorySelect.appendChild(createOption("상여", "상여"));
+            categorySelect.appendChild(createOption("기타", "기타"));
+        } else if (select.value === "지출") {
+            // 지출에 대한 category option 추가
+            categorySelect.appendChild(createOption("", "분류"));
+            categorySelect.appendChild(createOption("식비", "식비"));
+            categorySelect.appendChild(createOption("교통", "교통"));
+            categorySelect.appendChild(createOption("쇼핑", "쇼핑"));
+            categorySelect.appendChild(createOption("문화생활", "문화생활"));
+            categorySelect.appendChild(createOption("주거/통신", "주거/통신"));
+            categorySelect.appendChild(createOption("건강", "건강"));
+            categorySelect.appendChild(createOption("교육", "교육"));
+            categorySelect.appendChild(createOption("기타", "기타"));
+        }
+    }
+
+    function createOption(value, text) {
+        var option = document.createElement("option");
+        option.value = value;
+        option.text = text;
+        return option;
+    }
+</script>
+</html>
