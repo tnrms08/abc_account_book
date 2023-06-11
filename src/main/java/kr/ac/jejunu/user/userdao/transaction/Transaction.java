@@ -1,9 +1,7 @@
 package kr.ac.jejunu.user.userdao.transaction;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import kr.ac.jejunu.user.userdao.siteUser.SiteUser;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.CreatedDate;
@@ -18,10 +16,13 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @CreatedDate
     private String date;
     private String price;
     private String category;
     private String memo;
-    private String type;    //Income, Expense
+    private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private SiteUser siteUser;
 }

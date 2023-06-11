@@ -8,6 +8,7 @@
 <h1>ABC 가계부</h1>
 <h3>내역 추가</h3>
 <form th:action="@{/transactions/add}" method="post" th:object="${transaction}">
+    <input type="hidden" name="username" th:value="${username}" />
     <label>구분:
         <select th:field="*{type}" onchange="changeCategoryOptions(this)">
             <option value=""></option>

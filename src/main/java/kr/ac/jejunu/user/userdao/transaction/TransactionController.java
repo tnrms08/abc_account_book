@@ -1,6 +1,9 @@
 package kr.ac.jejunu.user.userdao.transaction;
 
+import kr.ac.jejunu.user.userdao.siteUser.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,10 +17,16 @@ public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/transactions")
     public String getAllTransactions(Model model) {
-        List<Transaction> transactions = transactionService.getAllTransactions();
+//        List<Transaction> transactions = transactionService.getAllTransactions();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        List<Transaction> transactions = transactionService.getBySiteUser(username);
+        model.addAttribute("username", username);
         model.addAttribute("transactions", transactions);
         return "transactionList";
     }
@@ -29,7 +38,12 @@ public class TransactionController {
 
     @PostMapping("/transactions/add")
     public String addTransaction(@ModelAttribute Transaction transaction) {
-        transactionService.addTransaction(transaction);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
+        transaction.setSiteUser(userService.getByUsername(username));
+
+        transactionService.addTransaction(transaction, username);
         return "redirect:/transactions";
     }
 
@@ -58,9 +72,12 @@ public class TransactionController {
                                  @RequestParam(value = "startDate", required = false) String startDate,
                                  @RequestParam(value = "endDate", required = false) String endDate,
                                  Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
         if (type != null && startDate != null && endDate != null) {
             // startDate와 endDate를 사용하여 특정 기간 내의 내역을 가져옵니다.
-            List<Transaction> transactions = transactionService.getTransactionsByTypeAndDateRange(type, startDate, endDate);
+//            List<Transaction> transactions = transactionService.getTransactionsByTypeAndDateRange(type, startDate, endDate);
+            List<Transaction> transactions = transactionService.getTransactionsByTypeAndDateRangeAndSiteUser(type, startDate, endDate, username);
 
             // 통계 계산 로직 수행
             Map<String, Double> statistics = calculateStatistics(transactions);
