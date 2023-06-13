@@ -1,24 +1,40 @@
 <!DOCTYPE html>
-<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">
-<div layout:fragment="content" class="container my-3">
-  <h1>ABC 가계부</h1>
-  <h3>로그인</h3>
-  <form th:action="@{/user/login}" method="post">
-    <div th:if="${param.error}">
-      <div class="alert alert-danger">
-        사용자ID 또는 비밀번호를 확인해 주세요.
-      </div>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>ABC 가계부</title>
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="frame loginFrame">
+    <div>
+      <h1>ABC 가계부</h1>
     </div>
-    <div class="mb-3">
-      <label for="username" class="form-label">사용자ID</label>
-      <input type="text" name="username" id="username" class="form-control">
+    <div class="formOutline">
+      <form th:action="@{/user/login}" method="post">
+        <div th:if="${param.error}" class="formIn">
+          <div>
+            사용자ID 또는 비밀번호를 확인해 주세요.
+          </div>
+        </div>
+        <div class="formIn">
+          <label for="username"></label>
+          <input class="loginForm"
+                  placeholder="아이디를 입력하세요."
+                  type="text" name="username" id="username">
+        </div>
+        <div  class="formIn">
+          <label for="password"></label>
+          <input class="loginForm"
+                  placeholder="비밀번호를 입력하세요."
+                  type="password" name="password" id="password">
+        </div>
+        <div class="buttonFrame">
+          <button type="submit" class="link login">로그인</button>
+          <a href="signup" class="link signup">회원가입</a>
+        </div>
+      </form>
     </div>
-    <div class="mb-3">
-      <label for="password" class="form-label">비밀번호</label>
-      <input type="password" name="password" id="password" class="form-control">
-    </div>
-    <button type="submit" class="btn btn-primary">로그인</button>
-  </form>
-  <a href="signup">회원가입</a>
-</div>
+  </div>
+</body>
 </html>

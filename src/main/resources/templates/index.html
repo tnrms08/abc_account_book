@@ -2,35 +2,20 @@
 <html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Home</title>
+    <title>ABC 가계부</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h3>홈화면</h3>
-<a class="button" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
-<a href="/user/login">로그인</a>
+<div class="frame">
+    <div>
+        <img src = "https://github.com/tnrms08/portalProject/assets/79959379/03abfd60-ae4d-405d-af6d-68e205c40707"/>
+    </div>
+    <div>
+        <h1>ABC 가계부</h1>
+    </div>
+    <div class="toLogin">
+        <a href="/user/login" class="link">로그인하러 가기</a>
+    </div>
+</div>
 </body>
 </html>
-<!--<!DOCTYPE html>-->
-<!--<html layout:decorate="~{layout}" xmlns:layout="http://www.w3.org/1999/xhtml">-->
-<!--<div layout:fragment="content" class="container my-3">-->
-<!--    <h1>ABC 가계부</h1>-->
-<!--    <h3>로그인</h3>-->
-<!--    <form th:action="@{/user/login}" method="post">-->
-<!--        <div th:if="${param.error}">-->
-<!--            <div class="alert alert-danger">-->
-<!--                사용자ID 또는 비밀번호를 확인해 주세요.-->
-<!--            </div>-->
-<!--        </div>-->
-<!--        <div class="mb-3">-->
-<!--            <label for="username" class="form-label">사용자ID</label>-->
-<!--            <input type="text" name="username" id="username" class="form-control">-->
-<!--        </div>-->
-<!--        <div class="mb-3">-->
-<!--            <label for="password" class="form-label">비밀번호</label>-->
-<!--            <input type="password" name="password" id="password" class="form-control">-->
-<!--        </div>-->
-<!--        <button type="submit" class="btn btn-primary">로그인</button>-->
-<!--    </form>-->
-<!--    <a href="user/signup">회원가입</a>-->
-<!--</div>-->
-<!--</html>-->

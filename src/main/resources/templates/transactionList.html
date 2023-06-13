@@ -3,44 +3,44 @@
 <head>
   <meta charset="UTF-8">
   <title>ABC 가계부</title>
-  <style>
-    .blue {
-      color: blue;
-    }
-    .red {
-      color: red;
-    }
-  </style>
+  <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>ABC 가계부</h1>
-<div sec:authorize="isAuthenticated()">
-  <p>로그인된 사용자: <!--/*@thymesVar id="name" type=""*/-->
-  <span th:text="${username}"></span></p>
+<div class="frame">
+  <div>
+    <h1>ABC 가계부</h1>
+  </div>
+  <div class="rightFrame">
+    <a href="/statistics" class="link static">통계</a>
+    <table>
+      <thead>
+      <tr>
+        <th>날짜</th>
+        <th>분류</th>
+        <th>금액</th>
+        <th>내용</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="transaction : ${transactions}">
+        <td th:text="${transaction.date}"></td>
+        <td th:text="${transaction.category}"></td>
+        <td th:text="${transaction.price}" th:class="${transaction.type == '수입' ? 'blue' : 'red'}"></td>
+        <td th:text="${transaction.memo}"></td>
+        <td><a th:href="@{/transactions/{id}/edit(id=${transaction.id})}"><img class="listImg" src="/edit.png"></a>
+          <a th:href="@{/transactions/{id}/delete(id=${transaction.id})}"><img class="listImg" src="/delete.png"></a>
+      </tr>
+      </tbody>
+    </table>
+    <a href="/transactions/add">
+      <img src="/plus.png" class="addImg">
+    </a>
+    <div class="buttonFrame" sec:authorize="isAuthenticated()">
+      <!--    <p><span th:text="${username}"></span></p>-->
+      <a class="link logout" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
+    </div>
+  </div>
 </div>
-<a class="button" sec:authorize="isAuthenticated()" th:href="@{/user/logout}">로그아웃</a>
-<table>
-  <thead>
-  <tr>
-    <th>날짜</th>
-    <th>분류</th>
-    <th>금액</th>
-    <th>내용</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr th:each="transaction : ${transactions}">
-    <td th:text="${transaction.date}"></td>
-    <td th:text="${transaction.category}"></td>
-    <td th:text="${transaction.price}" th:class="${transaction.type == '수입' ? 'blue' : 'red'}"></td>
-    <td th:text="${transaction.memo}"></td>
-    <td><a th:href="@{/transactions/{id}/edit(id=${transaction.id})}">수정</a>
-    <a th:href="@{/transactions/{id}/delete(id=${transaction.id})}">삭제</a>
-  </tr>
-  </tbody>
-</table>
-<a href="/transactions/add">내역 추가</a>
-<a href="/statistics">통계</a>
 </body>
 </html>

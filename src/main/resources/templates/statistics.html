@@ -3,53 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <title>ABC 가계부</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>ABC 가계부</h1>
-<h3>통계</h3>
-<form th:action="@{/statistics}" method="get">
-    <label>구분:</label>
-    <select name="type">
-        <option value=""></option>
-        <option value="지출">지출</option>
-        <option value="수입">수입</option>
-    </select>
-    <br/>
-    <label>시작일:</label>
-    <input type="date" name="startDate" />
-    <br/>
-    <label>종료일:</label>
-    <input type="date" name="endDate" />
-    <br/>
-    <input type="submit" value="통계 보기" />
-</form>
+<div class="frame staticFrame">
+    <div>
+        <h2>통계</h2>
+    </div>
+    <div class="formOutline formOutStatic formOutStaticUp">
+        <form class="formStatic" th:action="@{/statistics}" method="get">
+            <div class="formInStatic">
+                <label> 구분: &nbsp;&nbsp;</label>
+                <select class="select" name="type">
+                    <option value=""></option>
+                    <option value="지출">지출</option>
+                    <option value="수입">수입</option>
+                </select>
+                <br/>
+            </div>
+            <div class="formInStatic">
+                <label>시작일:
+                <input class="date" type="date" name="startDate" />
+                </label><br/>
+            </div>
+            <div class="formInStatic">
+                <label>종료일:
+                <input class="date" type="date" name="endDate" />
+                </label><br/>
+            </div>
+            <div class="buttonFrame buttonFrameStatic">
+                <input class="link showStatic" type="submit" value="통계 보기" />
+            </div>
+        </form>
+    </div>
+    <div class="formOutline formOutStatic">
+        <div class="labelForm">
+            <label>구분: <span th:text="${type}"></span></label>
+            <label>시작일: <span th:text="${startDate}"></span></label>
+            <label>종료일: <span th:text="${endDate}"></span></label>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th>분류</th>
+                <th>총액</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${statistics}">
+                <td th:text="${entry.key}"></td>
+                <td>
+                    <script th:inline="javascript">
+                        var value = /*[[${entry.value}]]*/ 0;
+                        var formattedValue = value.toLocaleString('en-US', { maximumFractionDigits: 0 });
+                        document.write(formattedValue);
+                    </script>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a class="link back" href="/transactions">이전</a>
+    </div>
+</div>
 
-<h3>통계 내용</h3>
-<p>구분: <span th:text="${type}"></span></p>
-<p>시작일: <span th:text="${startDate}"></span></p>
-<p>종료일: <span th:text="${endDate}"></span></p>
-
-<h3>통계 결과</h3>
-<table>
-    <thead>
-    <tr>
-        <th>분류</th>
-        <th>총액</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="entry : ${statistics}">
-        <td th:text="${entry.key}"></td>
-        <td>
-            <script th:inline="javascript">
-                var value = /*[[${entry.value}]]*/ 0;
-                var formattedValue = value.toLocaleString('en-US', { maximumFractionDigits: 0 });
-                document.write(formattedValue);
-            </script>
-        </td>
-    </tr>
-    </tbody>
-</table>
-<a href="/transactions">이전</a>
 </body>
 </html>

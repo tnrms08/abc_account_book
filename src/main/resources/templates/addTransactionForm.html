@@ -3,30 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <title>ABC 가계부</title>
+    <link href="/css/style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h1>ABC 가계부</h1>
-<h3>내역 추가</h3>
-<form th:action="@{/transactions/add}" method="post" th:object="${transaction}">
-    <input type="hidden" name="username" th:value="${username}" />
-    <label>구분:
-        <select th:field="*{type}" onchange="changeCategoryOptions(this)">
-            <option value=""></option>
-            <option value="수입">수입</option>
-            <option value="지출">지출</option>
-        </select>
-    </label><br/>
-    <label>날짜: <input type="date" th:field="*{date}" /></label><br/>
-    <label>분류:
-        <select th:field="*{category}" id="categorySelect"></select>
-        <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
-        </select>
-    </label><br/>
-    <label>금액: <input type="text" th:field="*{price}" onkeyup="inputNumberFormat(this)"/></label><br/>
-    <label>내용: <input type="text" th:field="*{memo}" /></label><br/>
-    <input type="submit" value="추가" />
-    <a href="/transactions">이전</a>
-</form>
+<div class="frame loginFrame">
+    <div>
+        <h2>내역 추가</h2>
+    </div>
+    <div class="formOutline">
+        <form th:action="@{/transactions/add}" method="post" th:object="${transaction}">
+            <div class="formIn2">
+                <input type="hidden" name="username" th:value="${username}" />
+                <label>구분:
+                    <select
+                            class="select"
+                            th:field="*{type}"
+                            onchange="changeCategoryOptions(this)">
+                        <option value=""></option>
+                        <option value="수입">수입</option>
+                        <option value="지출">지출</option>
+                    </select>
+                </label><br/>
+            </div>
+            <div class="formIn2">
+                <label>날짜: <input class="date" type="date" th:field="*{date}" /></label><br/>
+            </div>
+            <div class="formIn2">
+                <label>분류:
+                    <select
+                            class="select"
+                            th:field="*{category}" id="categorySelect"></select>
+                    <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+                    </select>
+                </label><br/>
+            </div>
+            <div class="formIn2">
+                <label>금액: <input type="text" th:field="*{price}" onkeyup="inputNumberFormat(this)"/></label><br/>
+            </div>
+            <div class="formIn2">
+                <label>내용: <input type="text" th:field="*{memo}" /></label><br/>
+            </div>
+            <div class="buttonFrame buttonFrameStatic">
+                <a class="link back" href="/transactions">이전</a>
+                <input class="link signup" type="submit" value="추가" />
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 <script>
     function inputNumberFormat(input) {

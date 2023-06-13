@@ -1,0 +1,200 @@
+h1 {
+    font-size: 38px;
+}
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+table{
+    width: 100%;
+    border-top: 1px solid #ff6363;
+    border-collapse: collapse;
+
+}
+th {
+    padding: 10px;
+    border-bottom: 1px solid #ff6363;
+    text-align: center;
+}
+td {
+    padding: 10px;
+    border-bottom: 1px solid #ff6363;
+    text-align: center;
+    color: black;
+}
+.frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 30%;
+    background-color: #fff5f5;
+    color: #ff6363;
+    box-sizing: border-box;
+    padding-bottom: 15%;
+}
+.loginFrame{
+    padding-bottom: 7%;
+}
+.staticFrame{
+    padding-bottom: 0%;
+}
+.rightFrame{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.link{
+    position: relative;
+    border-radius: 15px;
+    text-align: center;
+    transition: top .01s linear;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-weight: 600;
+    color: white;
+    border: solid;
+    border-color: #e26d68;
+    width: 35%;
+    height: 100%;
+    background-color: #e26d68;
+    font-size: 16px;
+}
+.login{
+    height: 100%;
+    width: 40%;
+    margin-right: 5%;
+}
+.back{
+    border: none;
+    background: none;
+    color: #e26d68;
+}
+.signup{
+    height: 100%;
+    width: 40%;
+}
+.static{
+    text-decoration: none;
+    height: 20%;
+    width: 20%;
+    margin: 5% 0% 4% 0%;
+}
+.showStatic{
+    margin-top: 5%;
+}
+.logout{
+    width: 18%;
+    color: #e26d68;
+    background: none;
+    border: none;
+}
+.toLogin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 6.5%;
+}
+img{
+    width: 400px;
+}
+.addImg{
+    width: 55%;
+    margin-top: 20%;
+    margin-left: 35%;
+}
+.listImg{
+    width: 17px;
+    filter: invert(50%) sepia(35%) saturate(690%) hue-rotate(314deg) brightness(97%) contrast(105%);
+}
+.buttonFrame{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 15%;
+    width: 100%;
+}
+.buttonFrameStatic{
+    height: 20%;
+}
+.formOutline{
+    height:30% ;
+    width: 50%;
+}
+.formOutStatic{
+    width: 80%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 55%;
+}
+.formOutStaticUp{
+    height: 20%;
+}
+.formOutStaticBottom{
+    width: 80%;
+    border-bottom: solid #e26d68;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 55%;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.formIn{
+    height:20%;
+    width: 90%;
+}
+.formIn2{
+    height:20%;
+}
+.formInStatic {
+    height: 20%;
+    display: flex;
+    width: 90%;
+    align-items: center;
+    justify-content: center;
+}
+.loginForm{
+    height:50%;
+    width: 100%;
+}
+.blue {
+    color: blue;
+}
+.red {
+    color: red;
+}
+.select{
+    width: 170.5px;
+    height: 21.5px;
+}
+.date{
+    width: 166.5px;
+    height: 17.5px;
+}
+.labelForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 55%;
+}
+.formStatic{
+    width: 100%;
+}
