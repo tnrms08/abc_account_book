@@ -56,6 +56,9 @@ public class TransactionController {
 
     @PostMapping("/transactions/{id}/edit")
     public String editTransaction(@PathVariable Long id, @ModelAttribute Transaction transaction) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        transaction.setSiteUser(userService.getByUsername(username));
         transaction.setId(id);
         transactionService.updateTransaction(transaction);
         return "redirect:/transactions";
